@@ -41,11 +41,12 @@ const posts = (await getCollection('blog')).sort(
 				text-align: center;
 			}
 			ul li:first-child img {
-				width: 100%;
+				max-width: 200px; /* ← 'width: 100%;' から変更 */
+				width: 100%; /* ← 念のため残します */
+				display: block; /* ← 中央揃えのために追加 */
+				margin: 0 auto; /* ← 中央揃えのために追加 */
 			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
+		
 			ul li img {
 				margin-bottom: 0.5rem;
 				border-radius: 12px;
@@ -80,9 +81,9 @@ const posts = (await getCollection('blog')).sort(
 				ul li:first-child {
 					margin-bottom: 0;
 				}
-				ul li:first-child .title {
+				/* ul li:first-child .title {
 					font-size: 1.563em;
-				}
+				} */
 			}
 		</style>
 	</head>
@@ -96,7 +97,7 @@ const posts = (await getCollection('blog')).sort(
 							<li>
 								<a href={`/blog/${post.id}/`}>
 									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
+										<Image width={400} height={200} src={post.data.heroImage} alt="" />
 									)}
 									<h4 class="title">{post.data.title}</h4>
 									<p class="date">
