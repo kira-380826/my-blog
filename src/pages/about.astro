@@ -3,17 +3,35 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { Image } from 'astro:assets';
+import characterImage from '../assets/main_character.png';
 ---
 
 <!doctype html>
 <html lang="ja">
 	<head>
 		<BaseHead title={`${SITE_TITLE} | About`} description={SITE_DESCRIPTION} />
+		<style>
+			.character-image {
+				max-width: 300px; /* 画像の最大幅 */
+				height: auto;
+				margin: 1.5em auto; /* 画像の上下に余白、左右を中央揃え */
+				display: block;
+				border-radius: 12px; /* 角を少し丸くする */
+				box-shadow: var(--box-shadow); /* 影をつけて立体感を出す */
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
 			<h1>About Me (TechBulk)</h1>
+			<Image 
+				src={characterImage} 
+				alt="TechBulkのキャラクター" 
+				width={600} 
+				class="character-image"
+			/>
 			<p>
 				はじめまして、このブログを運営している **TechBulk (テックバルク)** です。
 			</p>
