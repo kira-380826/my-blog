@@ -2,7 +2,7 @@
 title: '【速報】Gemini 3.0公開！「行動するAI」がついに現実に。新機能とエージェントの可能性'
 description: '2025年11月18日、Googleが最新モデル「Gemini 3.0」を発表しました。圧倒的な推論能力を持つ「Deep Think」や、アプリを自律操作する「Gemini Agent」など、主要機能を情報工学生の視点で解説します。'
 pubDate: '2025-11-20'
-heroImage: '../../../assets/blog-placeholder-3.jpg'
+
 ---
 
 ## ついに来た！Gemini 3.0
