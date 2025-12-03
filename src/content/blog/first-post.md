@@ -6,7 +6,7 @@ pubDate: '2025-11-04'
 ---
 
 ## はじめまして、TechBulkです
-
+![TechBulkです](../../assets/main_character.png)
 はじめまして！ このブログを運営している **TechBulk (テックバルク)** です。
 これは、AstroとNetlifyを使って立ち上げた、私専用の技術ブログの最初の記事です。
 
