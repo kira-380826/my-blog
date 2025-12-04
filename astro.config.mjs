@@ -8,7 +8,7 @@ import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://techbulk.netlify.app',
+	site: 'https://techbulk-lab.com',
 	markdown: {
 		remarkPlugins: [remarkMath],
 		rehypePlugins: [rehypeKatex],
