@@ -5,10 +5,11 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage, heroImageAlt } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, heroImageAlt, tags } = Astro.props;
 
 ---
 
@@ -53,6 +54,26 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageAlt } = As
 			.last-updated-on {
 				font-style: italic;
 			}
+			/* ↓↓↓ タグのスタイルを追加 */
+            .tags {
+                margin-top: 1rem;
+                display: flex;
+                gap: 0.5rem;
+                justify-content: center;
+            }
+            .tag a {
+                color: #00539F;
+                text-decoration: none;
+                border: 1px solid #00539F;
+                padding: 0.2em 0.5em;
+                border-radius: 4px;
+                font-size: 0.9em;
+            }
+            .tag a:hover {
+                background-color: #00539F;
+                color: white;
+            }
+			
 		</style>
 	</head>
 
@@ -64,6 +85,12 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageAlt } = As
 					{heroImage && <Image width={300} height={150} src={heroImage} alt="" />}
 				</div>
 				<div class="prose">
+					<Breadcrumbs 
+                        links={[
+                            { label: 'Blog', href: '/blog' }, 
+                            { label: title }
+                        ]} 
+                    />
 					<div class="title">
 						<div class="date">
 							<FormattedDate date={pubDate} />

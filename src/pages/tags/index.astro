@@ -1,0 +1,57 @@
+---
+// src/pages/tags/index.astro
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+// 全記事からタグを抽出し、重複を削除して一覧化
+const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+const pageTitle = "タグ一覧";
+---
+
+<html lang="ja">
+	<head>
+		<BaseHead title={pageTitle} description="このブログのタグ一覧です" />
+		<style>
+			/* 簡易的なタグクラウドのスタイル */
+			.tags {
+				display: flex;
+				flex-wrap: wrap;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			.tag {
+				margin: 0.25em;
+				border: dotted 1px #a1a1a1;
+				border-radius: .5em;
+				padding: .5em 1em;
+				font-size: 1.15em;
+				background-color: #F8FCFD;
+			}
+            .tag a {
+                text-decoration: none;
+                color: #00539F;
+            }
+            .tag:hover {
+                background-color: #e6f7ff;
+            }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+            <h1>{pageTitle}</h1>
+			<ul class="tags">
+				{tags.map((tag) => (
+					<li class="tag">
+						<a href={`/tags/${tag}`}>{tag}</a>
+					</li>
+				))}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>
