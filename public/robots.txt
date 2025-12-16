@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://techbulk.netlify.app/sitemap-index.xml
+Sitemap: https://techbulk-lab.com/sitemap-index.xml
