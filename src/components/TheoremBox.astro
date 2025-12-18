@@ -1,0 +1,32 @@
+---
+interface Props {
+	title?: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="theorem-box">
+	{title && <div class="box-title">{title}</div>}
+	<div class="box-content">
+		<slot />
+	</div>
+</div>
+
+<style>
+	.theorem-box {
+		background-color: #f0f8ff;
+		padding: 15px;
+		border-radius: 5px;
+		border: 1px solid #4682b4;
+		margin: 1.5rem 0;
+	}
+	.box-title {
+		font-weight: bold;
+		margin-bottom: 10px;
+		color: #0f172a; /* 視認性を考慮した濃い色 */
+	}
+	.box-content {
+		/* slotの中身（Markdown）にスタイルが適用されるようにする */
+	}
+</style>

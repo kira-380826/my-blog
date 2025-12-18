@@ -53,7 +53,7 @@ body {
 	padding: 1rem;    /* 画面端との余白 */
 }
 main {
-	width: 720px;
+	width: 860px;
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;
