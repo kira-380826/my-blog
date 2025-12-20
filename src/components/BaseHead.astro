@@ -12,9 +12,14 @@ interface Props {
 	image?: ImageMetadata;
 }
 
+let path = Astro.url.pathname;
+if (!path.endsWith('/')) {
+  path += '/';
+}
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = FallbackImage } = Astro.props;
+
 ---
 
 <!-- Google tag (gtag.js) -->
