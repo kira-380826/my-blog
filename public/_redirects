@@ -1,0 +1,2 @@
+# 初期ドメインから独自ドメインへの301リダイレクト（強制転送）
+https://techbulk.netlify.app/* https://techbulk-lab.com/:splat 301!
