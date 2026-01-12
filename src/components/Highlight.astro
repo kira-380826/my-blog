@@ -1,0 +1,78 @@
+---
+interface Props {
+  /**
+   * 強調の種類を指定します。
+   */
+  type?: 'important' | 'term' | 'idea' | 'code';
+}
+
+const { type = 'important' } = Astro.props;
+
+// スタイルの型を定義（? をつけることで、そのプロパティが無くてもOKにします）
+interface StyleDef {
+  color: string;
+  backgroundColor: string;
+  fontWeight: string;
+  borderBottom?: string;
+  padding?: string;
+  borderRadius?: string;
+  fontFamily?: string;
+}
+
+// stylesオブジェクトに型 (Record<string, StyleDef>) を適用
+const styles: Record<string, StyleDef> = {
+  important: {//重要単語は青
+    color: '#00BFFF',
+    backgroundColor: 'transparent',
+    fontWeight: 'bold',
+  },
+  term: {//専門用語は緑
+    color: '#33CC33',
+    backgroundColor: 'transparent',
+    fontWeight: 'bold',
+  },
+  idea: {//アイデアは黄色
+    color: '#FFCC00',
+    backgroundColor: 'transparent',
+    fontWeight: 'bold',
+  },
+  code: {
+    color: '#d63384',
+    backgroundColor: '#f1f3f5',
+    fontWeight: 'normal',
+    padding: '0.2em 0.4em',
+    borderRadius: '4px',
+    fontFamily: 'monospace'
+  }
+};
+
+// 型定義のおかげで、ここでエラーが出なくなります
+const currentStyle = styles[type] || styles.important;
+---
+
+<span class="highlight">
+  <slot />
+</span>
+
+<style define:vars={{ 
+  textColor: currentStyle.color, 
+  bgColor: currentStyle.backgroundColor,
+  fontWeight: currentStyle.fontWeight,
+  borderBottom: currentStyle.borderBottom || 'none',
+  padding: currentStyle.padding || '0',
+  borderRadius: currentStyle.borderRadius || '0',
+  fontFamily: currentStyle.fontFamily || 'inherit'
+}}>
+  .highlight {
+    color: var(--textColor);
+    background-color: var(--bgColor);
+    font-weight: var(--fontWeight);
+    border-bottom: var(--borderBottom);
+    padding: var(--padding);
+    border-radius: var(--borderRadius);
+    font-family: var(--fontFamily);
+    
+    display: inline-block; 
+    line-height: 1.2;
+  }
+</style>
