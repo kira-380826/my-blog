@@ -1,0 +1,101 @@
+---
+title: "第2回 量子情報科学入門: 1量子ビットの状態と演算"
+description: "量子ビットを数学的に記述する方法、ブラ・ケット記法、重ね合わせ状態の定義について学びます。"
+pubDate: "2026-02-02T10:00:00+09:00"
+tags: ["量子情報科学", "量子コンピュータ", "線形代数", "ブラケット記法", "量子ビット"]
+---
+import TheoremBox from '../../../components/TheoremBox.astro';
+import Highlight from '../../../components/Highlight.astro';
+
+## はじめに
+こんにちは、TechBulkです。
+[前回](/blog/quantum-information-science/article_01)は量子情報科学の概要について触れましたが、今回からは量子力学のルールを記述するための「言葉」、すなわち<Highlight type="important">線形代数</Highlight>を用いた数学的な定義に入っていきます。
+
+物理学と言うと「物質の実在とは何か？」といった哲学的な問いをイメージするかもしれませんが、量子情報科学においては、よりドライに、しかし厳密に<strong>「ベクトルと行列の演算」</strong>として量子を扱います。
+
+## 1量子ビットの数学的記述
+量子情報科学では、量子の状態を**ベクトル**で表します。このとき、物理学者のポール・ディラックが考案した<Highlight type="term">ブラ・ケット記法 (Bra-ket notation)</Highlight>を使うのが標準です。
+
+### ケットベクトルとブラベクトル
+まず、基本的な量子の状態を表す列ベクトルを<Highlight type="term">ケットベクトル (Ket vector)</Highlight>と呼び、$| \psi \rangle$ のように書きます。
+
+$$
+| \psi \rangle = \begin{pmatrix} \alpha \\ \beta \end{pmatrix}
+$$
+
+これに対応する行ベクトル（複素共役転置をとったもの）を<Highlight type="term">ブラベクトル (Bra vector)</Highlight>と呼び、$\langle \psi |$ と書きます。
+
+$$
+\langle \psi | = (| \psi \rangle)^\dagger = \begin{pmatrix} \alpha^* & \beta^* \end{pmatrix}
+$$
+
+ここで、$\dagger$（ダガー）は随伴行列（転置して複素共役をとる操作）を表し、$\alpha^*$ は $\alpha$ の複素共役を表します。
+
+<TheoremBox title="ブラ・ケット記法の定義">
+  <ul>
+    <li><strong>ケットベクトル (Ket):</strong> 状態を表す列ベクトル $| \psi \rangle$</li>
+    <li><strong>ブラベクトル (Bra):</strong> その双対ベクトル（行ベクトル） $\langle \psi |$</li>
+  </ul>
+  内積は $\langle \phi | \psi \rangle$ （ブラ・ケットを閉じる）のように記述します。
+</TheoremBox>
+
+## 計算基底と正規直交性
+古典コンピュータのビットは「0」か「1」の状態をとりますが、量子ビットの世界ではこれをベクトルで表現します。
+この「0」と「1」に対応するベクトルを<Highlight type="term">計算基底 (Computational Basis)</Highlight>と呼び、以下のように定義します。
+
+$$
+| 0 \rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad | 1 \rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}
+$$
+
+この2つのベクトルは、線形代数における非常に重要な性質を持っています。
+
+1. **大きさ（ノルム）が1である**
+   $$\langle 0 | 0 \rangle = 1, \quad \langle 1 | 1 \rangle = 1$$
+2. **互いに直交している（内積が0）**
+   $$\langle 0 | 1 \rangle = 0, \quad \langle 1 | 0 \rangle = 0$$
+
+このように、互いに直交し、かつ大きさが1である基底のセットを<Highlight type="important">正規直交基底</Highlight>と呼びます。
+
+## 重ね合わせ状態 (Superposition)
+量子ビットの最大の特徴である「重ね合わせ状態」は、計算基底 $|0\rangle$ と $|1\rangle$ の**線形結合**として表現されます。
+任意の1量子ビットの状態 $|\psi\rangle$ は、複素数 $\alpha, \beta$ を用いて次のように書けます。
+
+$$
+| \psi \rangle = \alpha | 0 \rangle + \beta | 1 \rangle = \begin{pmatrix} \alpha \\ \beta \end{pmatrix}
+$$
+
+この $\alpha$ と $\beta$ を<Highlight type="term">確率振幅 (Probability Amplitude)</Highlight>と呼びます。
+量子力学のルールでは、この状態を観測したとき：
+<ul>
+  <li><strong>0が観測される確率:</strong> $|\alpha|^2$</li>
+  <li><strong>1が観測される確率:</strong> $|\beta|^2$</li>
+</ul>
+となります。確率は合計して100%（つまり1）にならなければならないため、次の制約条件がつきます。
+
+<TheoremBox title="規格化条件 (Normalization)">
+  確率の総和は1である必要があるため、確率振幅は常に以下を満たします。
+  $$|\alpha|^2 + |\beta|^2 = 1$$
+</TheoremBox>
+
+## 量子情報における「波動関数」の解釈
+ここで一つ、学習を進める上での<Highlight type="idea">重要な心構え</Highlight>をお伝えします。
+
+物理学（量子力学）の文脈では、この状態ベクトル $|\psi\rangle$（波動関数）が「実在する波なのか？」「単なる情報の確率分布なのか？」といった解釈論が議論されることがあります。
+
+しかし、**量子情報科学**においては、そのような物理的な解釈論に深く立ち入る必要は必ずしもありません。
+
+<Highlight type="important">「量子状態はベクトルであり、演算は行列である」</Highlight>
+
+という公理（ルール）さえ受け入れれば、情報の処理、アルゴリズムの構築、そして誤り訂正の理論などを進めることができます。
+「なぜそうなるのか」という自然哲学的な問いよりも、「このルールを使ってどのような情報処理が可能か」に焦点を当てることが、この分野を楽しむコツかもしれません。
+
+## まとめ
+今回は、量子ビットを扱うための基本的な道具であるブラ・ケット記法と、状態の定義について学びました。
+
+<ul>
+  <li>量子状態は<strong>ベクトル</strong>（ケットベクトル）で表される。</li>
+  <li>$|0\rangle$ と $|1\rangle$ は<strong>正規直交基底</strong>である。</li>
+  <li>重ね合わせ状態は、基底の<strong>線形結合</strong>で書ける。</li>
+</ul>
+
+次回は、この量子ビットに対して操作を行う「量子ゲート」や「ユニタリ行列」について解説していく予定です。
